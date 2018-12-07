@@ -8,13 +8,11 @@ nav_include: 2
 ## Data Cleaning for NLP
 
 
-* Summary
-* Loading Data 
-* Initial Inspection
-    * Discarding Features
-* Data cleaning for NLP    
-* EDA/Feature Engineering
-    * Sentiment Analysis
+## Contents
+{:.no_toc}
+*  
+{: toc}
+
 
 ### Summary
 

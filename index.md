@@ -2,7 +2,7 @@
 title: Machine Learning and Analysis for Twitter Bot Detection
 ---
 
-####Motivation:
+##### Motivation:
 There are an average of 6,000 tweets produced on Twitter per second. Twitter posts are mostly
 public and can be easily collected using Twitter’s developer platform API. Also, frequent use of
 hashtags makes it more interesting to draw conclusions.
@@ -19,7 +19,7 @@ In order to detect bots, classification models and/or natural language processin
 as topic modeling and sentiment analysis can be incorporated. This project will involve feature
 engineering and will provide a real-world data collection experience.
 
-#####Questions:
+##### Questions:
 1. Can machine learning algorithms be applied to classify bot or human activity based on user-level and/or
 tweet-level data?
 2. Can engineered features based on NLP techniques improve bot prediction accuracy?
