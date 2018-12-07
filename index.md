@@ -1,5 +1,5 @@
 ---
-title: Machine Learning & Analysis for Twitter Bot Detection
+title: Machine Learning and Analysis for Twitter Bot Detection
 ---
 
 ####Motivation:
