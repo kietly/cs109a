@@ -1,0 +1,9 @@
+theme: jekyll-theme-primer
+title: Twitter Bot Detection
+description: Bot or Human?
+baseurl:
+markdown: kramdown
+kramdown:
+    math_engine: mathjax
+    input: GFM
+    syntax_highlighter: rouge
