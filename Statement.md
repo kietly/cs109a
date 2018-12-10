@@ -21,6 +21,5 @@ as topic modeling and sentiment analysis can be incorporated. This project will 
 engineering and will provide a real-world data collection experience.
 
 ##### Questions:
-1. Can machine learning algorithms be applied to classify bot or human activity based on user-level and/or
-tweet-level data?
+1. Can machine learning algorithms be applied to classify bot or human activity based on tweets?
 2. Can engineered features based on NLP techniques improve bot prediction accuracy?
