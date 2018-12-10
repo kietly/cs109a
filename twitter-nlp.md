@@ -1,6 +1,5 @@
 ---
 title: NLP
-notebook: twitter-nlp.ipynb
 nav_include: 3
 ---
 
