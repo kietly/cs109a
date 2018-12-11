@@ -85,11 +85,12 @@ these models from further evaluation and concentrated on the models that are doi
 
 With the addition of NLP features, the DecisionTreeClassifier accuracy improved dramatically.
 The graph shows overfitting starting at depth = 13. We will select depth = 12 as the optimal
-depth. 
+depth.
 
 ```
 # Base + NLP features
-all_tweets_df = all_tweets[['retweet_count', 'favorite_count', 'num_hashtags', 'num_urls', 'num_mentions','user_type', 'sentiment_negative', 'sentiment_neutral', 'sentiment_positive',
+all_tweets_df = all_tweets[['retweet_count', 'favorite_count', 'num_hashtags', 'num_urls',
+'num_mentions','user_type', 'sentiment_negative', 'sentiment_neutral', 'sentiment_positive',
 'token_count', 'url_token_ratio', 'ratio_neg', 'ant', 'fear', 'joy', 'trust','jaccard']]
 
 #Choosing the best depth
