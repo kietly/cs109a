@@ -40,7 +40,7 @@ for n in range(1,11):
 ```
 
 ##### LDA/QDA with Baseline features
-LDA and QDA are performed poorly. They are in the range of 71-75% accuracy. We also decided to eliminated these two
+LDA and QDA performed poorly. They are in the range of 71-75% accuracy. We also decided to eliminated these two
 models as well.
  
 ```
