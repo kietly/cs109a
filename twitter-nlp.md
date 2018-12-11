@@ -473,4 +473,4 @@ print('Scatter Matrix for Lexical Diversity')
 
 There is correlation between ttr, root_ttr , and log_ttr as expected. We ll use log_ttr as part of our features, apart from mtld, HD-D, Yule-k, as part of of our lexical diversity feature set.
 
-![png](twitter-nlp_files/twitter-nlp_42_1.png)
+![png](twitter-nlp_files/twitter-ld.png)
