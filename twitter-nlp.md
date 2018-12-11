@@ -23,22 +23,20 @@ nav_include: 3
 
 ### Feature Descriptions
 #### Linguistic Features
-The **lexical diversity** score indicates how many different words are used within a body of text. The lexical diversity consists of the set of unique words in a tweet divided by the total number of tweets. The **token_count** and **url_token_ratio** are numeric fields that count how many tokens are in a tweet and have the ratio for urls to tokens per tweet. These field are used to characterize how long the tweet is and also indicate the composition of the tweet in terms of words vs links to media (other websites, images, music, etc). The idea behind this feature was thinking that bots would be built to promote other media, not original ideas.
+The **lexical diversity** score indicates how many different words are used within a body of text. The lexical diversity consists of the set of unique words in a tweet divided by the total number of tweets. The **token_count** and **url_token_ratio** are numeric fields that count how many tokens are in a tweet and have the ratio for urls to tokens per tweet. These fields are used to characterize how long the tweet is and also indicate the composition of the tweet in terms of words vs links to media (other websites, images, music, etc). The idea behind this feature was thinking that bots would be built to promote other media, not original ideas. The **url_token_ratio** was elimimated as a feature because it highly correlated with token counts and was also identified as a low-variance feature.
 
 
 #### Emotion Based Features
-The **ant**, **disgust**, **fear**, **joy**, **sadness**, **surprise**, and **trust** features are boolean fields that indicate whether these emotions are  related to a given tweet. These assessments are created by comparing tweet tokens (words) with the EmoLex, the National Research Council (NRC) of Canada's Word-Emotion Association Lexicon. The EmoLex contains a mapping of words to emotions. If words within tweets have associated emotions within EmoLex, this would flag a 1 for the respective emotion feature.
+The **ant**, **disgust**, **fear**, **joy**, **sadness**, **surprise**, and **trust** features are boolean fields that indicate whether these emotions are  related to a given tweet. These assessments are created by comparing tweet tokens (words) with the EmoLex, the National Research Council (NRC) of Canada's Word-Emotion Association Lexicon. The EmoLex contains a mapping of words to emotions. If words within tweets have associated emotions within EmoLex, this would flag a 1 for the respective emotion feature. Discarded fields due to low-variance include **disgust**, **sadness**, and **surprise**. We suspect that the emotions that remained are expressed in tweets more than those that were excluded.
 
 
 #### Sentiment Based Features
-The **sentiment_neutral**, **sentiment_positive**, and **sentiment_negative** features are boolean fields that indicate the sentiment predicted for a given tweet. These predictions were computed using built-in methods of the textblob module, an nltk wrapper. In particular the sentiment polarity method predicts sentiment based on a Bayesian model trained on a labeled corpus of movie reviews. We also computed the ratios for each sentiment seen across each user's body of tweets. These features were called **ratio_pos**, **ratio_neg** and **ratio_neu**.
+The **sentiment_neutral**, **sentiment_positive**, and **sentiment_negative** features are boolean fields that indicate the sentiment predicted for a given tweet. These predictions were computed using built-in methods of the textblob module, an nltk wrapper. In particular the sentiment polarity method predicts sentiment based on a Bayesian model trained on a labeled corpus of movie reviews. We also computed the ratios for each sentiment seen across each user's body of tweets. These features were called **ratio_pos**, **ratio_neg** and **ratio_neu**. Feature selection eliminated the **ratio_pos** and **ratio_neu** which exhibited a positive linear correlation.
 
 
 
 #### Topic Model Based Features
-The **jaccard** feature consists of a rough jaccard similarity score that compares a user's top 10 topics with the top 10 topics generated from a sample of bots. The topics were derived using Non-negative Matrix Factorization to highlight the most important topics from the user's corpus of tweets. These were applied as an enrichment to the individual tweet. The **perc_in_bot_topic** feature indicates the ratio of words from an individual tweet that were also found in the top 10 bot topics to the total number of words within the tweet.
-
-
+The **jaccard** feature consists of a rough jaccard similarity score that compares a user's top 10 topics with the top 10 topics generated from a sample of bots. The topics were derived using Non-negative Matrix Factorization to highlight the most important topics from the user's corpus of tweets. These were applied as an enrichment to the individual tweet. The **perc_in_bot_topic** feature indicates the ratio of words from an individual tweet that were also found in the top 10 bot topics to the total number of words within the tweet. The **perc_in_bot_topic** did not produce non-zero results so was eliminated as a feature. With the low number of words in tweets, comparing individual tweets to a set of topics was not practical.
 
 ### Loading/Cleaning the  Data
 
@@ -49,9 +47,8 @@ To clean the data, we used a combination of custom and pre-built functions to cl
 
 Once we read and cleaned all the data, we created our features.
 
-### Creating Linguistic Features
-
-
+### Creating features
+#### Linguistic Features
 First we created the *token_count* and *url_token_ratio* features.
 
 
@@ -63,9 +60,9 @@ tweets_all['url_token_ratio'] = tweets_all['num_urls']/tweets_all['token_count']
 ```
 
 
-### Emotional Analysis Features
+#### Emotional Analysis Features
 
-To label tweets with emotion, we compared the tweet text with emoLex, the lexicon built by the NRC that maps words to their emotion. 
+To label tweets with emotion, we compared the tweet text with emoLex, the lexicon built by the NRC that maps words to their emotion. This created boolean fields indicating anticipation, disgust, fear, joy, sadness, surprise and trust.
 
 ```python
 def checkemo(x, emotions_list):
@@ -81,9 +78,9 @@ for key,values in feelings.items():
 ```
 
 
-### Sentiment Analysis
+#### Sentiment Analysis Features
 
-Again, for Sentiment Analysis, we used the textblob sentiment and polarity module to tag the text as having a positive, negative or neutral sentiment.
+Again, for Sentiment Analysis, we used the textblob sentiment and polarity module to tag the text as having a positive, negative or neutral sentiment. At the user level, we also computed the ratio of positive, negative and neutral sentiment fields and applied these to the tweets.
 
 ```python
 #get sentiment
@@ -96,36 +93,14 @@ def compute_sentiment_percentages(df, text_col, user_id_col):
     df['sentiment'] = df[text_col].astype(str).apply(lambda x: sentiment(x))
     df = pd.get_dummies(df, columns=['sentiment'])
     return df
-```
 
-
-
-
-```python
 #Sentiment Analysis --> creates positive/negative/neutral sentiment
 tweets_all = compute_sentiment_percentages(tweets_all, 'text','user_id')
 ```
 
-
-
-
-```python
-tweets_grouped2 = tweets_all.groupby('user_id')['sentiment_negative','sentiment_positive','sentiment_neutral'].sum()
-tweets_grouped2 = tweets_grouped2.reset_index()
-tweets_grouped2['sent_sum'] = tweets_grouped2['sentiment_negative'] + tweets_grouped2['sentiment_positive'] + tweets_grouped2['sentiment_neutral']
-tweets_grouped2['ratio_pos'] = tweets_grouped2['sentiment_positive']/tweets_grouped2['sent_sum']
-tweets_grouped2['ratio_neg'] = tweets_grouped2['sentiment_negative']/tweets_grouped2['sent_sum']
-tweets_grouped2['ratio_neu'] = tweets_grouped2['sentiment_neutral']/tweets_grouped2['sent_sum']
-tweets_grouped2 = tweets_grouped2.drop(['sentiment_negative','sentiment_positive','sentiment_neutral', 'sent_sum'], axis=1)
-tweets_all = pd.merge(tweets_all, tweets_grouped2, on='user_id')
-```
-
-
-### Topic Modeling
+#### Topic Modeling
 
 To compute our two topic-model based features, we first compute the top 10 topics from a sample of bots. We used Non-negative Matrix Factorization (NMF) as an unsupervised way to identify the major topics from which a body of a users tweets is composed. The function below uses tf-idf to further filter stop words, common words (seen in 95% or more of the tweets), or highly unique (seen in only 1 text).
-
-
 
 ```python
 def get10topics(x):
@@ -182,9 +157,7 @@ def get10topics(x):
 ```
 
 
-Here, we filter the data for a sample of bot data, topic model each individual bot user, then combine all these topics together to create a final top 10 for all the bots
-
-
+We used these functions to topic model each individual bot user, then combine all the bot topics together to create a final top 10 for all the bots
 
 ```python
 tweets_bots = tweets_all.loc[tweets_all['user_type'] == 0]
@@ -211,10 +184,9 @@ tweets_bots_final = get10topics(list(tweets_bots_grp['clean_text'])[0][0])
 ```
 
 
-#### Percent of a tweet's word also found in bot topics
+##### Percent of a tweet's word also found in bot topics
 
 Next, we compared each individual tweet against the bot topics. We created a score that gives the ratio for words from the tweet also seen in bot topics divided by the total number of words in the tweet. This value is indicated in the **'perc_in_bot_topics'**.
-
 
 
 ```python
@@ -232,28 +204,17 @@ def percent_tweet_in_bot_topics(clean_text,bots_topics):
     except:
         percent_in_tweet = 0
     return percent_in_tweet    
-```
 
-
-
-
-```python
 t0 = time()
 tweets_all['perc_in_bot_topic'] = tweets_all.loc[:,'clean_text'].apply(lambda x: percent_tweet_in_bot_topics(x, tweets_bots_final))
 print("done in %0.3fs." % (time() - t0))
 ```
 
-
-    done in 3.348s.
-
-
 Unfortunately, this metric returned 0 for every record. Because the individual tweets are so short, we suspect that comparing the individual tweet's tokens with the bot topics is not a good metric.
 
-#### Jaccard score
+##### Jaccard score
 
 To compute the similarity between an individual user's top 10 topics with the bot topics, we computed a Jaccard Score. Recall that we calculated the top 10 bot topics, so the next step was to compute the top 10 topic models for each user.
-
-
 
 ```python
 t0 = time()
@@ -263,13 +224,7 @@ tweets_grouped['topics'] = tweets_grouped.loc[:,'clean_text'].apply(lambda x: ge
 print("done in %0.3fs." % (time() - t0))
 ```
 
-
-    done in 12.506s.
-
-
 Next we computed the Jaccard score, which indicates how much the user and bot's topics overlap, then merged this data back in with the tweets data.
-
-
 
 ```python
 def jaccard(x,bots_topics):
@@ -289,12 +244,7 @@ def jaccard(x,bots_topics):
             score = get_jaccard_sim(a,b)
         total += score
     return total/10    
-```
 
-
-
-
-```python
 tweets_grouped['jaccard'] = tweets_grouped.loc[:,'topics'].apply(lambda x: jaccard(x, tweets_bots_final))
 tweets_grouped_final = tweets_grouped[['user_id','jaccard']]
 tweets_final = pd.merge(tweets_all, tweets_grouped_final, on='user_id')
@@ -303,7 +253,7 @@ tweets_final = pd.merge(tweets_all, tweets_grouped_final, on='user_id')
 
 ### Feature Selection
 
-We used sklearn's VarianceThreshold method to identify low-variance features.
+We used sklearn's VarianceThreshold method to identify low-variance features (features with mostly one value).
 
 
 ```python
@@ -320,6 +270,7 @@ tweets_all_var = tweets_final[['retweet_count', 'favorite_count', 'num_hashtags'
 features = variance_threshold_selector(tweets_all_var, threshold=(.95*.1)).columns
 ```
 
+Fields returned as meeting the variance threshold were the following:
 
     retweet_count
     favorite_count
@@ -337,8 +288,7 @@ features = variance_threshold_selector(tweets_all_var, threshold=(.95*.1)).colum
     trust
 
 
-Let's analyze the ratios before we discard them. A scatter matrix plots indicates that a linear correlation exists between ratio_neu and ratio_neg. We will keep ratio_neg because it does not appear to be correlated.
-
+A scatter matrix plot indicates that a linear correlation exists between ratio_neu and ratio_neg. We will keep ratio_neg because it does not appear to be correlated.
 
 
 ```python
@@ -350,36 +300,6 @@ print('Scatter Matrix for Sentiment Ratio Values')
 ```
 
 
-    Scatter Matrix for Sentiment Ratio Values
-
-
+### Scatter Matrix for Sentiment Ratio Values
 
 ![png](twitter-nlp_files/twitter-nlp_42_1.png)
-
-
-### Resources
-
-https://www.youtube.com/watch?v=UQGEB3Q5-fQ https://medium.com/ml2vec/topic-modeling-is-an-unsupervised-learning-approach-to-clustering-documents-to-discover-topics-fdfbf30e27df
-http://hebb.mit.edu/people/seung/pape... http://www.cs.helsinki.fi/u/phoyer/pa... http://hebb.mit.edu/people/seung/pape...
-watch this later: https://www.youtube.com/watch?v=ZTxXGZwe2gw
-https://arxiv.org/pdf/1308.6297.pdf
-
-https://www.geeksforgeeks.org/twitter-sentiment-analysis-using-python/
-
-https://codereview.stackexchange.com/questions/181152/identify-and-extract-urls-from-text-corpus
-
-https://en.wikipedia.org/wiki/Naive_Bayes_classifier
-
-https://streamhacker.com/2010/05/10/text-classification-sentiment-analysis-naive-bayes-classifier/
-
-https://nlpforhackers.io/topic-modeling/
-
-https://towardsdatascience.com/topic-modeling-and-latent-dirichlet-allocation-in-python-9bf156893c24
-
-https://towardsdatascience.com/topic-modelling-in-python-with-nltk-and-gensim-4ef03213cd21
-
-https://towardsdatascience.com/sentiment-analysis-with-python-part-1-5ce197074184
-
-http://www.nltk.org/book/ch06.html
-
-https://medium.freecodecamp.org/basic-data-analysis-on-twitter-with-python-251c2a85062e
