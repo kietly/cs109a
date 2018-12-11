@@ -7,7 +7,7 @@ nav_include: 4
 
 From Milestone#3, we have determined only these features are important.
 
-|Base Tweets Features|
+|BaselineFeatures|
 |:---|
 |retweet_count|
 |favorite_count|
