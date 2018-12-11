@@ -3,17 +3,24 @@ title: Models
 nav_include: 4
 ---
 
-#### Baseline features
+#### Baseline and NLP features
 
-From Milestone#3, we have determined only these features are important.
+From Milestone#3, we have determined only these baseline features are important, and similarly for NLP. Please refer
+back to EDA and NLP pages for explanation of these selected features
 
-|BaselineFeatures|
-|:---|
-|retweet_count|
-|favorite_count|
-|num_urls|
-|num_mentions|
-|num_hashtags|
+|Baseline features|NLP features| 
+|:----------------|:-----------|
+|retweet_count|sentiment_negative|
+|favorite_count|sentiment_neutral|
+|num_urls|sentiment_positive|
+|num_mentions|token_count|
+|num_hashtags|url_token_ratio|
+| |ratio_neg|
+| |ant|
+| |fear|
+| |joy|
+| |trust|
+| |jaccard|
 
 ### Evaluate Baseline features accuracy
 
@@ -40,7 +47,8 @@ for n in range(1,11):
 ```
 
 2. ##### LDA/QDA with Baseline features
-LDA and QDA performed poorly. They are in the range of 71-75% accuracy. Also note that LDA/QDA perform well with low number of observations according to class lecture. Note we have over 100K observations.
+LDA and QDA performed poorly. They are in the range of 71-75% accuracy. Also note that LDA/QDA perform well with 
+low number of observations according to class lecture. Note we have over 100K observations.
 
 ```
 X_train, y_train = train_base_tweets_df.drop('user_type',axis=1), train_base_tweets_df['user_type']
@@ -84,8 +92,9 @@ these models from further evaluation and concentrated on the models that are doi
 5. ##### Decision Tree/RandomForest with NLP features
 
 With the addition of NLP features, the DecisionTreeClassifier accuracy improved dramatically.
-The graph shows overfitting starting at depth = 13. We will select depth = 12 as the optimal
-depth.
+The graph shows over fitting starting at depth = 13. We will select depth = 12 as the optimal
+depth for RandomForest. The RandomForestClassifier accuracy is lower than decision tree because it
+is an average result over multiple estimators (DecisionTree).  
 
 ```
 # Base + NLP features
