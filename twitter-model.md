@@ -3,7 +3,7 @@ title: Models
 nav_include: 4
 ---
 
-### Baseline, NLP features, Lexical Diversity
+## Baseline, NLP features, Lexical Diversity
 
 Based on EDA and feature selection, we chose the following baseline features, NLP and Lexical Diversity features. Please refer back to EDA and NLP pages for more details about the selected features. Our approach was to start with the baseline model, then add the NLP features to see if the accuracy improved, and then we added the Lexical Diversity features to improve the model even more. The description below follows a similar trend.
 
@@ -352,7 +352,7 @@ for depth in range(1,21):
     scores = cross_val_score(estimator=dt, X=X_train, y=y_train, cv=5)
     cvmeans.append(scores.mean())
     cvstds.append(scores.std())
-    ```
+```
 
 ![Decision Tree with NLP features](image/DS_NLP.png)
 
