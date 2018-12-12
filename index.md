@@ -1,4 +1,4 @@
-## Group #4 CS109a Data Science Final Projects
+### Group #4 CS109a Data Science Final Project
 Kiet Ly, Mary Monroe, and Shaswati Mukherjee
 
 ![Evil Twitter](image/social-media-free-speech-weapon.png)
