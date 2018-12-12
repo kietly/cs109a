@@ -3,30 +3,29 @@ Kiet Ly, Mary Monroe, and Shaswati Mukherjee
 
 ![Evil Twitter](image/social-media-free-speech-weapon.png)
 
-#### Motivation:
-The role of so-called social media "bots" automated accounts capable of posting content or interacting
-with other users with no direct human involvement has been the subject of much scrutiny and
-attention in recent years. These bosts can also be used to attempt to alter perceptions
-of political discourse on social media, spread misinformation, or manipulate online rating and
-review systems. In the 2016 election, Twitter bots were shaping the outcome of the election.
-A recent study by Times, Twitter Bots may have boosted Trump's votes by 3.23%. During the Brexit 2016,
-the bots may have added 1.76% point to "pro-leave" votes[6].
+#### Motivation
+The role of social media bots, automated accounts capable of posting content or interacting
+with other users with no direct human involvement, has been the subject of much scrutiny and
+attention in recent years. These bots have been used to attempt to alter perceptions
+of political discourse on social media, spread misinformation, and manipulate online rating and
+review systems[1]. In the 2016 election, Twitter bots were shaping the outcome of the election.
+A recent study estimated that Twitter Bots may have boosted Trump's votes by 3.23%. During the Brexit 2016,
+the bots may have added 1.76% points to "pro-leave" votes[6].
 
 #### The Questions
-We want to automate the identification of these social bots through machine learning using just tweet
-data. In addition, we want to know by using NLP to generate additional features such as sentimental and emotional
-features will enhance prediction accuracy. By accurately identify these social bots tweets, it will provide an effective weapon to curb
-propaganda, disinformation, and provocation [7].
+Accurately identifying these social bots tweets can provide an effective weapon to curb propaganda, disinformation, and provocation [7]. We planned to determine whether automated social bot detection was achievable by applying machine learning techniques to tweet data. In addition, we tested whether including NLP based features such as those built from sentimental and emotional analysis would enhance prediction accuracy.
 
 
-#### Investigation approaches:
+#### Investigatory Approach
 
-Given the above questions, here is how we find the answers to the questions above.
-1. Apply EDA and using feature selection to identify the most important features from
-the tweets data collection. We call this the baseline features.
-2. Run pre-selected classification models on the baseline features. This give us the baseline
+Given the above questions, we intended to find the answers by using the following approach:
+
+1. Obtain baseline features by performing EDA and using feature selection to identify the most important features
+ of the tweet data.
+2. Run pre-selected classification models on the baseline features to obtain a baseline
 accuracy.
-3. Using NLP to generate additional features for topic modeling, sentimental and emotional features.
-4. Again, we use features selection to select the most important features from NLP. We call this extended features
-5. Combining the baseline and extended features and rerun with the same classification models from step #2.
-6. Pick the highest accuracy model and tune it further if needed.
+3. Generate extended features based on the tweet text by using NLP techniques such as topic modeling, linguistic, sentimental and emotional analysis.
+4. Perform feature selection to choose the most important features from the extended features.
+5. Combine the baseline and extended features, retrain and test the same classification models from step #2.
+6. Note any changes in accuracy 
+7. Pick the highest accuracy model and tune it further if needed.
