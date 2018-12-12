@@ -1,8 +1,3 @@
----
-title: ADABoost with NLP and LD
-nav_include: 7
----
-
 ### Logistic Regression and AdaBoost
 
 The code below steps through loading the data, splitting it into test/train datasets, tuning parameters and

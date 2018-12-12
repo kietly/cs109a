@@ -1,8 +1,3 @@
----
-title: Various Models with additional Features
-nav_include: 8
----
-
 ```python
 import numpy as np
 import pandas as pd

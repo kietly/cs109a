@@ -185,7 +185,7 @@ print("done in %0.3fs." % (time() - t0))
 
 #### Neural Net with Baseline Features
 
-#### Neural Network without NLP
+##### Neural Network without NLP
 
 In this section we try to use Keras to build a layered Neural Net.
 We will use a fully-connected network structure with five layers.
@@ -242,26 +242,6 @@ model.summary()
 history=model.fit(X_train_no_nlp, y_train_no_nlp, epochs=200, batch_size=25, validation_split = .2)
 ```
 accuracy for Baseline Neural Network: 79.02%
-
-
-```python
-print(history.history.keys())
-# summarize history for accuracy
-plt.plot(history.history['acc'])
-plt.plot(history.history['val_acc'])
-plt.title('model accuracy')
-plt.ylabel('accuracy')
-plt.xlabel('epoch')
-plt.legend(['train', 'test'], loc='lower right')
-plt.show()
-```
-
-
-dict_keys(['val_loss', 'val_acc', 'loss', 'acc'])
-
-
-![png](Models_kNN_LDA_QDA_DT_RF_NN_LD_files/Models_kNN_LDA_QDA_DT_RF_NN_LD_17_1.png)
-
 
 ### Evaluate Model Accuracy for Extended Features (Baseline + NLP Features + Lexical diversity Features)
 Next we used the same model techniques used on the baseline features on the extended features (baseline and NLP features. We observed that accuracy improved for most models with the addition of NLP features.
@@ -480,47 +460,18 @@ model_nlp.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accura
 ```
 
 
-
 ```python
 history = model_nlp.fit(X_train, y_train, epochs=100, batch_size=32, validation_split = .2)
 
 print(model_nlp.evaluate(X_test, y_test))
-
-model_json = model_nlp.to_json()
-
-with open("model_ld_"+".json", "w") as json_file:
-    json_file.write(model_json)
-
-# serialize weights to HDF5
-model_nlp.save_weights("model_ld_"+".h5")
-
-print(history.history.keys())
-# summarize history for accuracy
-plt.plot(history.history['acc'])
-plt.plot(history.history['val_acc'])
-plt.title('model accuracy')
-plt.ylabel('accuracy')
-plt.xlabel('epoch')
-plt.legend(['train', 'test'], loc='lower right')
-plt.show()
-
-# summarize history for loss
-plt.plot(history.history['loss'])
-plt.plot(history.history['val_loss'])
-plt.title('model loss')
-plt.ylabel('loss')
-plt.xlabel('epoch')
-plt.legend(['train', 'test'], loc='lower right')
-plt.show()
-plt.savefig("model_ld_"+".jpg")
 ```
-![png](Models_kNN_LDA_QDA_DT_RF_NN_LD_files/Models_kNN_LDA_QDA_DT_RF_NN_LD_20_1.png)
-
-![png](Models_kNN_LDA_QDA_DT_RF_NN_LD_files/Models_kNN_LDA_QDA_DT_RF_NN_LD_20_2.png)
-
 
 ```python
-NN_testScore_ld=model_nlp.evaluate(X_test, y_test)
-print("\n%s: %.2f%%" % (model_nlp.metrics_names[1], NN_testScore_ld[1]*100))
+  NN_testScore_ld=model_nlp.evaluate(X_test, y_test)
+  print("\n%s: %.2f%%" % (model_nlp.metrics_names[1], NN_testScore_ld[1]*100))
 ```
-Accuracy with Neural Network and adding NLP and Lexical Diversity features:
+
+![png](Models_kNN_LDA_QDA_DT_RF_NN_LD_files/Models_kNN_LDA_QDA_DT_RF_NN_LD_17_1.png)
+
+
+Accuracy with Neural Network and adding NLP and Lexical Diversity features: 93%
