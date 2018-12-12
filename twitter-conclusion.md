@@ -10,7 +10,20 @@ nav_include: 5
 
 We ran 8 different models against both the baseline set of features and extended features. Models trained against the baseline features did not achieve high accuracy, with the range in accuracy across all the models falling between 76% and 79%.
 
-When trained and tested against the extended data, however, the accuracy significantly improved for all models and ranged between 89% and 99%. Even the Logistic Regression Classifier, though the worst performer, had a 6% improvement in accuracy just by adding the extended fields. We chose the Random Forest Classifier as our best performing model because it provided the highest accuracy with the least complexity. 
+When trained and tested against the extended data, however, the accuracy significantly improved for all models and ranged between 89% and 99%. 
+Even the Logistic Regression Classifier, though the worst performer, had a 6% improvement in accuracy just by adding the extended fields. 
+We chose the Random Forest Classifier as our best performing model because it provided the highest accuracy with the least complexity. 
+The table summarize the progressive improvement among all the dataset. 
+
+|Models|Base features|NLP features|NLP features+Lexical Diversity|
+|:-----|:------------|:-----------|:-----------------------------|
+|Logistics Regression|76.4|82.4||
+|LDA|71.6|81.03||
+|QDA|75.4|76.3||
+|DecisionTree|79.5|96.1||
+|RandomForest|79.4|92.3||
+|AdaBoost|79.5|98.9||
+
 
 #### NLP Features Improve Bot Detection
 
