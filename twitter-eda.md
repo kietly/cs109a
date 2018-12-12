@@ -86,9 +86,9 @@ following are plots for features with the strongest predictive value.
 The values seen in “retweet\_count“ for human versus bot users is visualized in Figure 1.
 
 
-<center><img src="image/retweet_count_scatter.png" width="300"/></center>
+<center><img src="image/retweet_count_scatter.png" width="450"/></center>
 
-<center> *Figure 1: Retweet Count Histogram* </center>
+<center> Figure 1: Retweet Count Histogram </center>
 
 
 
@@ -99,15 +99,15 @@ rather than creating original content that others also want to retweet.
 A histogram of frequency of “Num\_urls” values per user is seen in Figure 2.
 
 <center><img src="image/num_urls_hist.png" width="450"/></center>
-<center> *Figure 2: Num Urls Histograms* </center>
+<center> Figure 2: Num Urls Histograms </center>
 
 The plot indicates that bots had more tweets with 1 url, whereas humans had more tweets with 0 urls. Again, the purpose of the bot is to boost a particular site or message, which means the tweet should be boosting a URL.
 
 The plot of values for favorite\_count in Figure 3, show that humans had a greater range of values for favorite_count than bots.
 
 
-<center><img src="image/fav_count_scatter.png" width="150"/></center>
-<center> *Figure 3: Favorite Count Scatterplots* </center>
+<center><img src="image/fav_count_scatter.png" width="450"/></center>
+<center> Figure 3: Favorite Count Scatterplots </center>
 
 
 
@@ -116,14 +116,14 @@ Again, the bots were likely boosting media, and not creating new content that us
 The final predictor of this set was the Num\_mentions feature.
 
 
-<center><img src="image/num_ment_hist.png" width="150"/></center>
-<center> *Figure 4: Num_mentions Histogram* </center>
+<center><img src="image/num_ment_hist.png" width="450"/></center>
+<center> Figure 4: Num_mentions Histogram </center>
 
 
 The histogram in Figure 4 shows a small area where humans have a higher density of users with num_mentions of 2, and at the upper extreme where only bots have num_mentions.  The values where only bots take on values is easier to visualize in the scatterplot of num_mentions values in Figure 5.
 
-<center><img src="image/num_ment_scatter.png" width="150"/></center>
-<center> *Figure 5: Num\_mentions Scatterplot* </center>
+<center><img src="image/num_ment_scatter.png" width="450"/></center>
+<center> Figure 5: Num\_mentions Scatterplot </center>
 
 
 To further identify strong base predictors, we also performed filtering of low variance features by using
