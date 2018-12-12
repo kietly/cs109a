@@ -11,12 +11,12 @@ the tweets dataset.
 Table 1, below, lists the features selected as a result of the EDA performed in this project.
 
 |Features        |Description                       |
-|:---------------|:---------------------------------|
-| favorite count | count # of likes                  |
-| num hashtags   | # of hashtags used in tweets      |
-| num urls       | # of urls used in tweets          |
+|----------------|----------------------------------|
+| favorite count | count # of likes                 |
+| num hashtags   | # of hashtags used in tweet      |
+| num urls       | # of urls used in tweets         |
 | num mentions   | # of mentions of your @ username |
-| retweet count  | # of retweets                     |
+| retweet count  | # of retweets                    |
 **Table 1: Base Features Selected**
 
 #### Data Collection
@@ -80,7 +80,7 @@ Next, data were plotted to identify features
 that would help the models discriminate between the two classes. The
 following showed the strongest predictive value. The values seen in “retweet\_count“ for human versus bot users is visualized in Figure 1.
 
-![retweet count](image/retweet_count_scatter.png)
+![retweet count](image/retweet_count_scatter.png =200x200)
 **Figure 1: Retweet Count Histogram**
 
 The retweet\_count feature takes on multiple values for human users, but for bots most values are nearly 0. Perhaps bots are boosting media,
