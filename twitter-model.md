@@ -453,9 +453,7 @@ model_nlp.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accura
 
 
 ```python
-history = model_nlp.fit(X_train, y_train, epochs=100, batch_size=32, validation_split = .2)
-
-print(model_nlp.evaluate(X_test, y_test))
+  history = model_nlp.fit(X_train, y_train, epochs=100, batch_size=32, validation_split = .2)
 ```
 
 ```python

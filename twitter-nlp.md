@@ -485,3 +485,27 @@ print('Scatter Matrix for Lexical Diversity')
 There is correlation between ttr, root_ttr , and log_ttr as expected. We ll use log_ttr as part of our features, apart from mtld, HD-D, Yule-k, as part of of our lexical diversity feature set.
 
 ![png](twitter-nlp_files/twitter-ld.png)
+
+```python
+
+tweets_all_var = all_tweets_df[['retweet_count', 'favorite_count', 'num_hashtags', 'num_urls', 'num_mentions',\
+                                 'user_type', 'sentiment_negative', 'sentiment_neutral', 'sentiment_positive',\
+                                 'ratio_pos', 'ratio_neg', 'ratio_neu', 'token_count','url_token_ratio', \
+                                 'ant','disgust', 'fear', 'joy', 'sadness', 'surprise', 'trust', 'jaccard','LD-ttr','LD-root_ttr','LD-corrected_ttr','LD-log_ttr','LD-uber_index','LD-yule_s_k','LD-mtld','LD-hdd']]
+
+tweets_all_var[['LD-yule_s_k']] = tweets_all_var[['LD-yule_s_k']].fillna(0)
+
+def convert_float(val):
+    try:
+        return float(val)
+    except ValueError:
+        return 0
+
+tweets_all_var['LD-yule_s_k']=tweets_all_var['LD-yule_s_k'].apply(lambda x: convert_float(x))
+tweets_all_var
+features = variance_threshold_selector(tweets_all_var, threshold=(.95*.1)).columns
+```
+
+Features that are significant:
+
+retweet_count, favorite_count, num_hashtags, num_urls, num_mentions, user_type, sentiment_negative, sentiment_neutral, sentiment_positive, token_count, ant, fear, joy, trust, LD-uber_index, LD-yule_s_k, LD-mtld, LD-hdd
