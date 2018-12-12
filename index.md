@@ -1,5 +1,32 @@
-#### Summary
+---
+title: Project Statement
+nav_include: 0
+---
 
-#### Report Navigation
-To review the Problem Statement and the questions this project are trying to answer,
-please click on "Project Statement". To exam out data our dataset please click on "EDA". For extensive feature engineering with NLP, please click on "NLP". To review our models and tuning, please click our "Model". To see our conclusion and proposal for further research, please click on "Conclusion". Finally, check our "References" for online research information that we have came across that are relevant to this project. 
+##### Motivation:
+The role of so-called social media "bots" automated accounts capable of posting content or interacting 
+with other users with no direct human involvement has been the subject of much scrutiny and
+attention in recent years. These bosts can also be used to attempt to alter perceptions
+of political discourse on social media, spread misinformation, or manipulate online rating and
+review systems. In the 2016 election, Twitter bots were shaping the outcome of the election. 
+A recent study by Times, Twitter Bots may have boosted Trump's votes by 3.23%. During the Brexit 2016,
+the bots may have added 1.76% point to "pro-leave" votes[6].
+
+##### The Questions
+We want to automate the identification of these social bots through machine learning using just tweet 
+data. In addition, we want to know by using NLP to generate additional features such as sentimental and emotional
+features will enhance prediction accuracy. By accurately identify these social bots tweets, it will provide an effective weapon to curb 
+propaganda, disinformation, and provocation [7]. 
+ 
+
+##### Investigation approaches:
+
+Given the above questions, here is how we find the answers to the questions above.
+1. Apply EDA and using feature selection to identify the most important features from 
+the tweets data collection. We call this the baseline features.
+2. Run pre-selected classification models on the baseline features. This give us the baseline
+accuracy.
+3. Using NLP to generate additional features for topic modeling, sentimental and emotional features.
+4. Again, we use features selection to select the most important features from NLP. We call this NLP selected features
+5. Combining the baseline and NLP selected features and rerun with the same classification models from step #2.
+6. Pick the highest accuracy model and tune it further if needed. 
