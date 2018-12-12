@@ -28,23 +28,6 @@ all_tweets_df = all_tweets[['retweet_count', 'favorite_count', 'num_hashtags', '
                                'user_type']]
 ```
 
-#### Input data with Features for NLP
-```python
-all_tweets_df = all_tweets[['retweet_count', 'favorite_count', 'num_hashtags', 'num_urls', 'num_mentions',
-                               'user_type', 'sentiment_negative', 'sentiment_neutral', 'sentiment_positive',
-                               'ratio_pos', 'ratio_neg', 'ratio_neu', 'token_count', 'url_token_ratio', 'ant',
-                               'disgust', 'fear', 'joy', 'sadness', 'surprise', 'trust','jaccard']]
-```
-
-#### Input data with Features for NLP and Lexical Diversity
-```python
-all_tweets_df = all_tweets[['retweet_count', 'favorite_count', 'num_hashtags', 'num_urls', 'num_mentions',
-                               'user_type', 'sentiment_negative', 'sentiment_neutral', 'sentiment_positive',
-                               'ratio_pos', 'ratio_neg', 'ratio_neu', 'token_count', 'url_token_ratio', 'ant',
-                               'disgust', 'fear', 'joy', 'sadness', 'surprise', 'trust','jaccard','LD-uber_index','LD-yule_s_k','LD-mtld','LD-hdd']]
-```
-
-
 ### KNN
 #### kNN with Baseline features
 We have a fairly large number of tweets (over 100K). kNN takes forever to run. We decided drop the kNN from further evaluation.  
@@ -245,6 +228,15 @@ accuracy for Baseline Neural Network: 79.02%
 
 ### Evaluate Model Accuracy for Extended Features (Baseline + NLP Features + Lexical diversity Features)
 Next we used the same model techniques used on the baseline features on the extended features (baseline and NLP features. We observed that accuracy improved for most models with the addition of NLP features.
+
+#### Input data with Features for NLP and Lexical Diversity
+```python
+all_tweets_df = all_tweets[['retweet_count', 'favorite_count', 'num_hashtags', 'num_urls', 'num_mentions',
+                               'user_type', 'sentiment_negative', 'sentiment_neutral', 'sentiment_positive',
+                               'ratio_pos', 'ratio_neg', 'ratio_neu', 'token_count', 'url_token_ratio', 'ant',
+                               'disgust', 'fear', 'joy', 'sadness', 'surprise', 'trust','jaccard','LD-uber_index','LD-yule_s_k','LD-mtld','LD-hdd']]
+```
+
 
 #### Logistic Regression (Cross Validated) with Extended Features
 ##### Logistic Regression (Cross Validated) with NLP features
