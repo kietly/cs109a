@@ -1,3 +1,7 @@
+##Group #4 CS109a Data Science Final Projects
+Kiet Ly, Mary Monroe, and Shaswati Mukherjee
+
+
 
 #### Motivation:
 The role of so-called social media "bots" automated accounts capable of posting content or interacting 
