@@ -10,13 +10,15 @@ the tweets dataset.
 
 Table 1, below, lists the features selected as a result of the EDA performed in this project.
 
-|Features        |Description                       |
-|----------------|----------------------------------|
-| favorite count | count # of likes                 |
-| num hashtags   | # of hashtags used in tweet      |
-| num urls       | # of urls used in tweets         |
-| num mentions   | # of mentions of your @ username |
-| retweet count  | # of retweets                    |
+
+
+|Features|Description|
+|:---------------|:---------------------------------|
+|favorite count|count # of likes|
+|num hashtags|# of hashtags used in tweet|
+|num urls|# of urls used in tweets|
+|num mentions|# of mentions of your username|
+|retweet count|# of retweets|
 **Table 1: Base Features Selected**
 
 #### Data Collection
@@ -37,9 +39,9 @@ The dataset contained individual tweet event content, metrics derived from the t
 
 #### Creating The Data Sample
 
-One technical problem we encountered was out of memory error when processing
+One technical problem we encountered was an out of memory error when processing
 the nearly 1GB tweets.csv file. Our workaround was to
-filter in small chunk size. Even though this was a relatively clean dataset, we
+read in small chunk sizes. Even though this was a relatively clean dataset, we
 still encountered empty fields and 'NA' in the user\_id column which we
 cleaned.
 
@@ -59,8 +61,8 @@ a Boolean field and indicated a human if 1 and a bot if 0. We used this field fo
 
 #### EDA and Feature Selection for Tweet-Level Data
 
-Results of analyzing features indicated that the most useful fields for
-our classification efforts are: **retweet count, favorite count, num
+Results of feature analysis indicated that the most useful fields for
+our classification efforts were: **retweet count, favorite count, num
 hashtags, num urls, and num mentions and sentiment\_negative**.
 Analyzing the .info() output shows us that five of the features are empty
 or have 0 for every value and we will drop these from the dataset:
@@ -78,10 +80,16 @@ No linear relationships between features were identified by plotting correlation
 
 Next, data were plotted to identify features
 that would help the models discriminate between the two classes. The
-following showed the strongest predictive value. The values seen in “retweet\_count“ for human versus bot users is visualized in Figure 1.
+following are plots for features with the strongest predictive value.
 
-![retweet count](image/retweet_count_scatter.png =200x200)
-**Figure 1: Retweet Count Histogram**
+The values seen in “retweet\_count“ for human versus bot users is visualized in Figure 1.
+
+
+<center><img src="image/retweet_count_scatter.png" width="150"/></center>
+
+<center> *Figure 1: Retweet Count Histogram* </center>
+
+
 
 The retweet\_count feature takes on multiple values for human users, but for bots most values are nearly 0. Perhaps bots are boosting media,
 rather than creating original content that others also want to retweet.
@@ -89,28 +97,33 @@ rather than creating original content that others also want to retweet.
 
 A histogram of frequency of “Num\_urls” values per user is seen in Figure 2.
 
-![Num URLS Histogram](image/num_urls_hist.png)
-**Figure 2: Num Urls Histograms**
+<center><img src="image/num_urls_hist.png" width="150"/></center>
+<center> *Figure 2: Num Urls Histograms* </center>
 
 The plot indicates that bots had more tweets with 1 url, whereas humans had more tweets with 0 urls. Again, the purpose of the bot is to boost a particular site or message, which means the tweet should be boosting a URL.
 
 The plot of values for favorite\_count in Figure 3, show that humans had a greater range of values for favorite_count than bots.
 
-![](image/fav_count_scatter.png)
-**Figure 3: Favorite Count Scatterplot**
+
+<center><img src="image/fav_count_scatter.png" width="150"/></center>
+<center> *Figure 3: Favorite Count Scatterplots* </center>
+
 
 
 Again, the bots were likely boosting media, and not creating new content that users would favorite.
 
 The final predictor of this set was the Num\_mentions feature.
 
-![](image/num_ment_hist.png)
-**Figure 4: Num_mentions Histogram**
+
+<center><img src="image/num_ment_hist.png" width="150"/></center>
+<center> *Figure 4: Num_mentions Histogram* </center>
+
 
 The histogram in Figure 4 shows a small area where humans have a higher density of users with num_mentions of 2, and at the upper extreme where only bots have num_mentions.  The values where only bots take on values is easier to visualize in the scatterplot of num_mentions values in Figure 5.
 
-![](image/num_ment_scatter.png)
-**Figure 5: Num\_mentions Scatterplot**
+<center><img src="image/num_ment_scatter.png" width="150"/></center>
+<center> *Figure 5: Num\_mentions Scatterplot* </center>
+
 
 To further identify strong base predictors, we also performed filtering of low variance features by using
 sklearn's variance threshold method which further identified the following
