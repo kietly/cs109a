@@ -13,12 +13,13 @@ Table 1, below, lists the features selected as a result of the EDA performed in 
 
 
 |Features|Description|
-|:---------------|:---------------------------------|
+|:-------|:----------|
 |favorite count|count # of likes|
 |num hashtags|# of hashtags used in tweet|
 |num urls|# of urls used in tweets|
 |num mentions|# of mentions of your username|
 |retweet count|# of retweets|
+
 **Table 1: Base Features Selected**
 
 #### Data Collection
@@ -85,7 +86,7 @@ following are plots for features with the strongest predictive value.
 The values seen in “retweet\_count“ for human versus bot users is visualized in Figure 1.
 
 
-<center><img src="image/retweet_count_scatter.png" width="150"/></center>
+<center><img src="image/retweet_count_scatter.png" width="300"/></center>
 
 <center> *Figure 1: Retweet Count Histogram* </center>
 
@@ -97,7 +98,7 @@ rather than creating original content that others also want to retweet.
 
 A histogram of frequency of “Num\_urls” values per user is seen in Figure 2.
 
-<center><img src="image/num_urls_hist.png" width="150"/></center>
+<center><img src="image/num_urls_hist.png" width="450"/></center>
 <center> *Figure 2: Num Urls Histograms* </center>
 
 The plot indicates that bots had more tweets with 1 url, whereas humans had more tweets with 0 urls. Again, the purpose of the bot is to boost a particular site or message, which means the tweet should be boosting a URL.
