@@ -1,7 +1,3 @@
----
-title: Project Statement
-nav_include: 0
----
 
 #### Motivation:
 The role of so-called social media "bots" automated accounts capable of posting content or interacting 
