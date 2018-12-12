@@ -16,12 +16,12 @@ The table summarize the progressive improvement in accuracy among all the datase
 
 |Models|Base features|NLP features|NLP features+Lexical Diversity|
 |:-----|:------------|:-----------|:-----------------------------|
-|Logistics Regression|76.4|82.4|0|
-|LDA|71.6|81.03|0|
-|QDA|75.4|76.3|0|
-|DecisionTree|79.5|96.1|0|
-|RandomForest|79.4|92.3|0|
-|AdaBoost|79.5|98.9|0|
+|Logistics Regression|76.4|82.4|82.7|
+|LDA|71.6|81.0|81.1|
+|QDA|75.4|76.3|73.5|
+|DecisionTree|79.5|96.1|99.1|
+|RandomForest|79.4|92.3|99.3|
+|AdaBoost|79.5|98.9|99.4|
 
 Table 1. Models prediction accuracy
 
