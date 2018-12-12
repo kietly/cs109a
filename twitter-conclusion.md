@@ -4,6 +4,17 @@ notebook: twitter-conclusions.ipynb
 nav_include: 5
 ---
 
-#### Conclusions
+### Results
 
-Group #4 deserved an A.
+#### Model Accuracy
+
+We ran 8 different models against both the baseline set of features and extended features. Models trained against the baseline features did not achieve high accuracy, with the range in accuracy across all the models falling between 76% and 79%.
+
+When trained and tested against the extended data, however, the accuracy significantly improved for all models and ranged between 89% and 99%. Even the Logistic Regression Classifier, though the worst performer, had a 6% improvement in accuracy just by adding the extended fields. We chose the Random Forest Classifier as our best performing model because it provided the highest accuracy with the least complexity. 
+
+#### NLP Features Improve Bot Detection
+
+Based on the results of our testing, we assess that including NLP features engineered from the tweet text improved Bot Detection. These Online Social Platforms are built for users to communicate ideas, so capturing deeper language patterns in the tweet text itself, in combination with metrics about the reaction to the tweets and users (likes, retweets, etc), and other activity can improve bot detection.
+
+#### Future Work
+ There are still many unexplored ideas that we have yet to explore. For example, we read research indicating that analyzing the temporal nature of tweet activity can uncover bot behaviors. It would be interesting to explore these temporal patterns in user behavior and again extend these with NLP to see if Tweet Topics have temporal patterns.
