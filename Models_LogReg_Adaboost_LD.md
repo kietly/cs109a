@@ -1,5 +1,5 @@
 ---
-title: References
+title: ADABoost with NLP and LD
 nav_include: 7
 ---
 
