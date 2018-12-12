@@ -1,15 +1,14 @@
-### Group #4 CS109a Data Science Final Project
-Kiet Ly, Mary Monroe, and Shaswati Mukherjee
+# <center> Bot or Not?
+### <center> Using Machine Learning Techniques and NLP-derived Features to Detect Twitter Bots
+
+##### CS109a Final Project
+Group 4: Kiet Ly, Mary Monroe, and Shaswati Mukherjee
 
 ![Evil Twitter](image/social-media-free-speech-weapon.png)
 
 #### Motivation
-The role of social media bots, automated accounts capable of posting content or interacting
-with other users with no direct human involvement, has been the subject of much scrutiny and
-attention in recent years. These bots have been used to attempt to alter perceptions
-of political discourse on social media, spread misinformation, and manipulate online rating and
-review systems[1]. In the 2016 United States Presidential election, a recent study estimated that Twitter Bots may have boosted President Trump's votes by 3.23%. During the United Kingdom Brexit vote in 2016,
-the bots may have added 1.76% points to "pro-leave" votes[6].
+Social media bots are automated accounts capable of posting content or interacting
+with other users with no direct human involvement. Bot activity on social media platforms have been the subject of scrutiny and attention in recent years. These bots have been used to attempt to alter perceptions of political discourse on social media, spread misinformation, and manipulate online rating and review systems [1]. In the 2016 United States Presidential election, a recent study estimated that Twitter Bots may have boosted President Trump's votes by 3.23%. During the United Kingdom Brexit vote in 2016, the bots may have added 1.76% points to "pro-leave" votes[6].
 
 #### The Questions
 Accurately identifying these social bots tweets can provide an effective weapon to curb propaganda, disinformation, and provocation [7]. We planned to determine whether automated social bot detection was achievable by applying machine learning techniques to tweet data. In addition, we tested whether including NLP based features such as those built from sentimental and emotional analysis would enhance prediction accuracy.
