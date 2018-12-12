@@ -7,13 +7,13 @@ nav_include: 4
 
 Based on EDA and feature selection, we chose the following baseline features and NLP features. Please refer back to EDA and NLP pages for more details about the selected features
 
-|Baseline features|NLP features|
-|:----------------|:-----------|
-|retweet_count|sentiment_negative|
-|favorite_count|sentiment_neutral|
-|num_urls|sentiment_positive|
-|num_mentions|token_count|
-|num_hashtags|url_token_ratio|
+|Baseline features|NLP features|Lexical Diversity features|
+|:----------------|:-----------|:-----------|
+|retweet_count|sentiment_negative|LD-log_ttr|
+|favorite_count|sentiment_neutral|LD-uber_index|
+|num_urls|sentiment_positive|LD-yule_s_k|
+|num_mentions|token_count|LD-mtld|
+|num_hashtags|url_token_ratio|LD-hdd|
 | |ratio_neg|
 | |ant|
 | |fear|

@@ -20,6 +20,11 @@ nav_include: 3
 * joy
 * trust
 * ratio_neg
+* LD-mtld
+* LD-HD-D
+* LD-Yule-k
+* LD-uber_index
+
 
 ### Feature Descriptions
 #### Linguistic Features
@@ -41,6 +46,7 @@ In the case of lexical diversity measurement, a common strategy used to cope wit
 
 **Yule-k** - . The measure of lexical repetition constitutes one of the variables used to determine the lexical diversity of texts.Although most of the constants for lexical richness actually depend on text length, Yule’s characteristic is considered to be highly reliable for being text length independent
 
+**uber-index** - a logarithmic transformation of the TTR
 
 #### Emotion Based Features
 The **ant**, **disgust**, **fear**, **joy**, **sadness**, **surprise**, and **trust** features are boolean fields that indicate whether these emotions are  related to a given tweet. These assessments are created by comparing tweet tokens (words) with the EmoLex, the National Research Council (NRC) of Canada's Word-Emotion Association Lexicon. The EmoLex contains a mapping of words to emotions. If words within tweets have associated emotions within EmoLex, this would flag a 1 for the respective emotion feature. Discarded fields due to low-variance include **disgust**, **sadness**, and **surprise**. We suspect that the emotions that remained are expressed in tweets more than those that were excluded.
@@ -418,10 +424,11 @@ def variance_threshold_selector(data, threshold=0.5):
     selector.fit(data)
     return data[data.columns[selector.get_support(indices=True)]]
 
-tweets_all_var = tweets_final[['retweet_count', 'favorite_count', 'num_hashtags', 'num_urls', 'num_mentions',\
-                                 'user_type', 'sentiment_negative', 'sentiment_neutral', 'sentiment_positive',\
-                                 'ratio_pos', 'ratio_neg', 'ratio_neu', 'token_count','url_token_ratio', \
-                                 'ant','disgust', 'fear', 'joy', 'sadness', 'surprise', 'trust', 'jaccard']]
+    tweets_all_var = all_tweets_df[['retweet_count', 'favorite_count', 'num_hashtags', 'num_urls', 'num_mentions',\
+                                     'user_type', 'sentiment_negative', 'sentiment_neutral', 'sentiment_positive',\
+                                     'ratio_pos', 'ratio_neg', 'ratio_neu', 'token_count','url_token_ratio', \
+                                     'ant','disgust', 'fear', 'joy', 'sadness', 'surprise', 'trust', 'jaccard','LD-ttr','LD-root_ttr','LD-corrected_ttr','LD-log_ttr','LD-uber_index','LD-yule_s_k','LD-mtld','LD-hdd']]
+
 features = variance_threshold_selector(tweets_all_var, threshold=(.95*.1)).columns
 ```
 
@@ -441,6 +448,10 @@ Fields returned as meeting the variance threshold were the following:
     fear
     joy
     trust
+    LD-uber_index
+    LD-yule_s_k
+    LD-mtld
+    LD-hdd
 
 
 A scatter matrix plot indicates that a linear correlation exists between ratio_neu and ratio_neg. We will keep ratio_neg because it does not appear to be correlated.

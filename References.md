@@ -44,3 +44,9 @@ nav_include: 6
 [20]. http://www.nltk.org/book/ch06.html
 
 [21]. https://medium.freecodecamp.org/basic-data-analysis-on-twitter-with-python-251c2a85062e
+
+[22]. https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0197775
+
+[23]. https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3813439/
+
+[24]. https://rdrr.io/cran/quanteda/man/textstat_lexdiv.html
