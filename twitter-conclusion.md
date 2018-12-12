@@ -17,12 +17,12 @@ The table summarize the progressive improvement in accuracy among all the datase
 
 |Models|Base features|NLP features|NLP features+Lexical Diversity|
 |:-----|:------------|:-----------|:-----------------------------|
-|Logistics Regression|76.4%|82.4%||
-|LDA|71.6%|81.03%||
-|QDA|75.4%|76.3%||
-|DecisionTree|79.5%|96.1%||
-|RandomForest|79.4%|92.3%||
-|AdaBoost|79.5%|98.9%||
+|Logistics Regression|76.4|82.4||
+|LDA|71.6|81.03||
+|QDA|75.4|76.3||
+|DecisionTree|79.5|96.1||
+|RandomForest|79.4|92.3||
+|AdaBoost|79.5|98.9||
 Table 1. Models prediction accuracy
 
 #### NLP Features Improve Bot Detection
