@@ -1,3 +1,7 @@
+---
+title: References
+nav_include: 7
+---
 
 ### Logistic Regression and AdaBoost
 
