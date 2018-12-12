@@ -8,7 +8,7 @@ the tweets dataset.
 
 #### Summary of EDA Results
 
-Table 1 shows the results of EDA and important feature selection.
+Table 1, below, lists the features selected as a result of the EDA performed in this project.
 
 |Features        |Description                       |
 |:---------------|:---------------------------------|
@@ -17,7 +17,7 @@ Table 1 shows the results of EDA and important feature selection.
 | num urls       | # of urls used in tweets          |
 | num mentions   | # of mentions of your @ username |
 | retweet count  | # of retweets                     |
-
+**Table 1: Base Features Selected**
 
 #### Data Collection
 
