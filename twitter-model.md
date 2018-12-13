@@ -27,10 +27,11 @@ Based on EDA and feature selection, we chose the following baseline features, NL
 ![png](image/base_input.PNG)
 
 ##### Baseline + NLP
-![png](image/nlp_input.PNG)
+<left><img src="image/nlp_input.png" height="60" width="1350"/></left>
 
-##### Baseline + NLP + Lexical Diversity 
-![png](image/ld_input.PNG)
+##### Baseline + NLP + Lexical Diversity
+<left><img src="image/ld_input.png" height="60" width="1350"/></left>
+
 ### KNN
 ##### kNN with Baseline features
 We have a fairly large number of tweets (over 100K). kNN takes forever to run. We decided drop the kNN from further evaluation.  
@@ -68,7 +69,7 @@ print("Log Regression Model Accuracy with Base Features (Test) is ",test_score_l
 
 ### LDA/QDA
 #### LDA/QDA with Baseline Features
-LDA and QDA performed poorly. They are in the range of 71-75% accuracy. 
+LDA and QDA performed poorly. They are in the range of 71-75% accuracy.
 
 ```python
 X_train, y_train = train_base_tweets_df.drop('user_type',axis=1), train_base_tweets_df['user_type']
