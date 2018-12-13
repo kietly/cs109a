@@ -27,10 +27,10 @@ Based on EDA and feature selection, we chose the following baseline features, NL
 ![png](image/base_input.PNG)
 
 ##### Baseline + NLP
-<left><img src="image/nlp_input.png" height="60" width="1350"/></left>
+![NLP input](image/nlp_input.PNG)
 
 ##### Baseline + NLP + Lexical Diversity
-<left><img src="image/ld_input.png" height="60" width="1350"/></left>
+![LD input](image/ld_input.PNG)
 
 ### KNN
 ##### kNN with Baseline features
