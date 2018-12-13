@@ -4,7 +4,7 @@ nav_include: 3
 ---
 
 
-## Natural Language Processing Features and Analysis
+## Natural Language Processing (NLP) Features and Analysis
 
 
 ### Summary
@@ -25,16 +25,20 @@ nav_include: 3
 * LD-Yule-k
 * LD-uber_index
 
+### Loading/Cleaning the  Data
 
-### Feature Descriptions
+A fundamental component in performing Natural Language Processing is having clean text data.To clean our data, we used a combination of custom and pre-built functions to clean the tweet data for NLP. Our analysis focused on English language lexicons and models built on English language data, so in addition to lemmatizing the words, and removing stopwords, punctuation, urls and url encoding, we detected language and filtered out non-english words. The full code for these methods may be found in our Notebooks tab.
+
+
+### Feature Engineering and Descriptions
+We used various methods from langdetect, nltk, textblob, sklearn and customized open source code to perform our processing and analysis.
+
 #### Linguistic Features
-The **lexical diversity** score indicates how many different words are used within a body of text. The lexical diversity consists of the set of unique words in a tweet divided by the total number of tweets. The **token_count** and **url_token_ratio** are numeric fields that count how many tokens are in a tweet and have the ratio for urls to tokens per tweet. These fields are used to characterize how long the tweet is and also indicate the composition of the tweet in terms of words vs links to media (other websites, images, music, etc). The idea behind this feature was thinking that bots would be built to promote other media, not original ideas. The **url_token_ratio** was elimimated as a feature because it highly correlated with token counts and was also identified as a low-variance feature.
+The **lexical diversity** score indicates how many different words are used within a body of text. The lexical diversity consists of the set of unique words in a tweet divided by the total number of tweets. The **token_count** and **url_token_ratio** are numeric fields that count how many tokens are in a tweet and have the ratio for urls to tokens per tweet. These fields are used to characterize how long the tweet is and also indicate the composition of the tweet in terms of words vs links to media (other websites, images, music, etc). The idea behind this feature was thinking that bots would be built to promote other media, not original ideas. The **url_token_ratio** was eliminated as a feature because it highly correlated with token counts and was also identified as a low-variance feature.
 
-Listed below are some more sophisticated techniques that are used to measure Lexical Diversity. These features were generated and some of them were ruled out due to high correlation. (as shown by the scatter matrix, later in this discussion)
+Listed below are some more sophisticated techniques that were generated to measure Lexical Diversity. Some were ruled out due to high correlation, as discussed in the feature analysis section.
 
 **ttr**- The Type-Token Ratio represents the most used and intuitive way to measure lexical diversity on the basis of word repetition patterns. TTR consists in expressing the number of different words “as a proportion of the total number of words.” The higher the probability that a new word token is also a new word type, the closer the TTR is to 1, and the greater the lexical diversity of that text. In the case of lexical diversity measurement, a common strategy used to cope with sample size dependency consists in finding an adequate mathematical expression of the type count slowdown in order to counterbalance its effect on the TTR.
-
-In the case of lexical diversity measurement, a common strategy used to cope with sample size dependency consists in finding an adequate mathematical expression of the type count slowdown in order to counterbalance its effect on the TTR.
 
 **root_ttr** - Various attempts were made in this regard: some studies assumed that the ratio fall is proportional to the square root of the token count
 
@@ -42,37 +46,22 @@ In the case of lexical diversity measurement, a common strategy used to cope wit
 
 **mtld** - Strategy that has so far successfully dealt with the sample size dependency of the TTR or any TTR-based measure consists in controlling for sample upsizing through fixed size sampling procedures.
 
-**HD-D** - index derived directly from the hypergeometric distribution
+**HD-D** - Index derived directly from the hypergeometric distribution
 
-**Yule-k** - . The measure of lexical repetition constitutes one of the variables used to determine the lexical diversity of texts.Although most of the constants for lexical richness actually depend on text length, Yule’s characteristic is considered to be highly reliable for being text length independent
+**Yule-k** - The measure of lexical repetition constitutes one of the variables used to determine the lexical diversity of texts.Although most of the constants for lexical richness actually depend on text length, Yule’s characteristic is considered to be highly reliable for being text length independent
 
 **uber-index** - a logarithmic transformation of the TTR
 
-#### Emotion Based Features
-The **ant**, **disgust**, **fear**, **joy**, **sadness**, **surprise**, and **trust** features are boolean fields that indicate whether these emotions are  related to a given tweet. These assessments are created by comparing tweet tokens (words) with the EmoLex, the National Research Council (NRC) of Canada's Word-Emotion Association Lexicon. The EmoLex contains a mapping of words to emotions. If words within tweets have associated emotions within EmoLex, this would flag a 1 for the respective emotion feature. Discarded fields due to low-variance include **disgust**, **sadness**, and **surprise**. We suspect that the emotions that remained are expressed in tweets more than those that were excluded.
+The following code created our linguistic features. We created the *token_count* and *url_token_ratio* features.
 
+```python
+#compute new features: token count and url to token ratio
+tweets_all['token_count'] = tweets_all.loc[:,'text'].apply(lambda x: len(x))
 
-#### Sentiment Based Features
-The **sentiment_neutral**, **sentiment_positive**, and **sentiment_negative** features are boolean fields that indicate the sentiment predicted for a given tweet. These predictions were computed using built-in methods of the textblob module, an nltk wrapper. In particular the sentiment polarity method predicts sentiment based on a Bayesian model trained on a labeled corpus of movie reviews. We also computed the ratios for each sentiment seen across each user's body of tweets. These features were called **ratio_pos**, **ratio_neg** and **ratio_neu**. Feature selection eliminated the **ratio_pos** and **ratio_neu** which exhibited a positive linear correlation.
+tweets_all['url_token_ratio'] = tweets_all['num_urls']/tweets_all['token_count']
+```
 
-
-
-#### Topic Model Based Features
-The **jaccard** feature consists of a rough jaccard similarity score that compares a user's top 10 topics with the top 10 topics generated from a sample of bots. The topics were derived using Non-negative Matrix Factorization to highlight the most important topics from the user's corpus of tweets. These were applied as an enrichment to the individual tweet. The **perc_in_bot_topic** feature indicates the ratio of words from an individual tweet that were also found in the top 10 bot topics to the total number of words within the tweet. The **perc_in_bot_topic** did not produce non-zero results so was eliminated as a feature. With the low number of words in tweets, comparing individual tweets to a set of topics was not practical.
-
-### Loading/Cleaning the  Data
-
-To begin this analysis, we loaded modules and tweet data. We used various methods from langdetect, nltk, textblob and sklearn to perform our processing and analysis.
-
-
-To clean the data, we used a combination of custom and pre-built functions to clean the tweet data for NLP. Our analysis focused on English language lexicons and models built on English language data, so in addition to lemmatizing the words, and removing stopwords, punctuation, urls and url encoding, we detected language and filtered out non-english words. The full code for these methods may be found in our Notebooks tab.
-
-Once we read and cleaned all the data, we created our features.
-
-### Creating features
-#### Linguistic Features
-First we created the *token_count* and *url_token_ratio* features.
-
+The lexical diversity fields were also generated.
 
 ```python
 #compute new features: ttr, yule's k, uber index,
@@ -220,8 +209,9 @@ def hdd(word_array, sample_size=42.0):
     return hdd_value
 ```
 
+#### Emotional Analysis Based Features
 
-#### Emotional Analysis Features
+The **ant**, **disgust**, **fear**, **joy**, **sadness**, **surprise**, and **trust** features are boolean fields that indicate whether these emotions are  related to a given tweet. These assessments are created by comparing tweet tokens (words) with the EmoLex, the National Research Council (NRC) of Canada's Word-Emotion Association Lexicon. The EmoLex contains a mapping of words to emotions. If words within tweets have associated emotions within EmoLex, this would flag a 1 for the respective emotion feature. Discarded fields due to low-variance include **disgust**, **sadness**, and **surprise**. We suspect that the emotions that remained are expressed in tweets more than those that were excluded.
 
 To label tweets with emotion, we compared the tweet text with emoLex, the lexicon built by the NRC that maps words to their emotion. This created boolean fields indicating anticipation, disgust, fear, joy, sadness, surprise and trust.
 
@@ -239,7 +229,9 @@ for key,values in feelings.items():
 ```
 
 
-#### Sentiment Analysis Features
+#### Sentiment Analysis Based Features
+The **sentiment_neutral**, **sentiment_positive**, and **sentiment_negative** features are boolean fields that indicate the sentiment predicted for a given tweet. These predictions were computed using built-in methods of the textblob module, an nltk wrapper. In particular the sentiment polarity method predicts sentiment based on a Bayesian model trained on a labeled corpus of movie reviews. We also computed the ratios for each sentiment seen across each user's body of tweets. These features were called **ratio_pos**, **ratio_neg** and **ratio_neu**. Feature selection eliminated the **ratio_pos** and **ratio_neu** which exhibited a positive linear correlation.
+
 
 Again, for Sentiment Analysis, we used the textblob sentiment and polarity module to tag the text as having a positive, negative or neutral sentiment. At the user level, we also computed the ratio of positive, negative and neutral sentiment fields and applied these to the tweets.
 
@@ -259,7 +251,10 @@ def compute_sentiment_percentages(df, text_col, user_id_col):
 tweets_all = compute_sentiment_percentages(tweets_all, 'text','user_id')
 ```
 
-#### Topic Modeling
+#### Topic Model Based Features
+The **jaccard** feature consists of a rough jaccard similarity score that compares a user's top 10 topics with the top 10 topics generated from a sample of bots. The topics were derived using Non-negative Matrix Factorization to highlight the most important topics from the user's corpus of tweets. These were applied as an enrichment to the individual tweet. The **perc_in_bot_topic** feature indicates the ratio of words from an individual tweet that were also found in the top 10 bot topics to the total number of words within the tweet. The **perc_in_bot_topic** did not produce non-zero results so was eliminated as a feature. With the low number of words in tweets, comparing individual tweets to a set of topics was not practical.
+
+
 
 To compute our two topic-model based features, we first compute the top 10 topics from a sample of bots. We used Non-negative Matrix Factorization (NMF) as an unsupervised way to identify the major topics from which a body of a users tweets is composed. The function below uses tf-idf to further filter stop words, common words (seen in 95% or more of the tweets), or highly unique (seen in only 1 text).
 
@@ -319,30 +314,6 @@ def get10topics(x):
 
 
 We used these functions to topic model each individual bot user, then combine all the bot topics together to create a final top 10 for all the bots
-
-```python
-tweets_bots = tweets_all.loc[tweets_all['user_type'] == 0]
-tweets_bots = resample(tweets_bots, n_samples=30000, replace=False)
-#Only keep english language tweets
-tweets_bots = df_detect_en(tweets_bots,'text')
-tweets_bots = tweets_bots.loc[tweets_bots['en_flag']==1]
-t0 = time()
-
-#Compute topics per bot user
-tweets_bots = tweets_bots.groupby('user_id').agg(lambda x: x.tolist())
-tweets_bots = tweets_bots.reset_index()
-tweets_bots['topics'] = tweets_bots.loc[:,'clean_text'].apply(lambda x: get10topics(x))
-
-#filter out users with 0 topics
-tweets_bots['topic_len'] = tweets_bots.loc[:,'topics'].apply(lambda x: len(x))
-tweets_bots= tweets_bots.loc[tweets_bots['topic_len'] > 0]
-tweets_bots['dummy'] = 1
-tweets_bots_grp = tweets_bots.groupby('dummy').agg(lambda x: x.tolist())
-
-#Create Top 10 topic models from all the social spambot users
-tweets_bots_grp = tweets_bots_grp.reset_index()
-tweets_bots_final = get10topics(list(tweets_bots_grp['clean_text'])[0][0])
-```
 
 
 ##### Percent of a tweet's word also found in bot topics

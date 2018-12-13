@@ -312,8 +312,7 @@ depth for RandomForest. The RandomForestClassifier accuracy is lower than decisi
 is an average result over multiple estimators (DecisionTree).  
 
 ##### Decision Tree/RandomForest with NLP Features
-The Decision Tree performed well here. After tree depth = 12, the accuracy is not improving.
-We pick 12 as the optimal tree depth for RandomForest. The accuracy shot up to about 96%
+The Decision Tree performed well here. After tree depth = 12, the accuracy did not improve, so we chose 12 as the optimal tree depth. The accuracy shot up to about 96%
 
 ```python
 depths, train_scores, cvmeans, cvstds, cv_scores = [], [], [], [], []
@@ -350,8 +349,7 @@ The Random Forest scored 0.923 on the test set.
 
 ##### Decision Tree/RandomForest with Lexical Diversity Features
 The Decision Tree performed well here. After tree depth = 12, the accuracy is not improving.
-We pick 12 as the optimal tree depth for RandomForest. The accuracy shot up to about 99%.
-This worked out well for us.
+We picked 12 as the optimal tree depth. The accuracy shot up to about 99%.
 
 ```python
 #Perform 5-fold cross validation and store results
