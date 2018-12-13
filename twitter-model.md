@@ -22,23 +22,21 @@ Based on EDA and feature selection, we chose the following baseline features, NL
 | |jaccard|
 
 
-### Input data with Features for Baseline
-```python
-all_tweets_df = all_tweets[['retweet_count', 'favorite_count', 'num_hashtags', 'num_urls', 'num_mentions',
-                               'user_type']]
-```
+### Sample input data
+##### Baseline
+![png](image/base_input.PNG)
 
+##### Baseline + NLP
+![png](image/nlp_input.PNG)
+
+##### Baseline + NLP + LD 
+![png](image/ld_input.PNG)
 ### KNN
-#### kNN with Baseline features
+##### kNN with Baseline features
 We have a fairly large number of tweets (over 100K). kNN takes forever to run. We decided drop the kNN from further evaluation.  
 
 ```python
-all_tweets_df = all_tweets[['retweet_count', 'favorite_count', 'num_hashtags', 'num_urls', 'num_mentions','user_type']]
-train_base_tweets_df, test_base_tweets_df = train_test_split(all_tweets_df, test_size=0.33, random_state=42,
-                                                              stratify=all_tweets_df['user_type'])
 
-X_train, y_train = train_base_tweets_df.drop('user_type',axis=1), train_base_tweets_df['user_type']
-X_test, y_test = test_base_tweets_df.drop('user_type',axis=1), test_base_tweets_df['user_type']
 Xs_train, Xs_test = scale(X_train), scale(X_test)
 
 neighbors, train_scores, cvmeans, cvstds, cv_scores = [], [], [], [], []
@@ -70,9 +68,7 @@ print("Log Regression Model Accuracy with Base Features (Test) is ",test_score_l
 
 ### LDA/QDA
 #### LDA/QDA with Baseline Features
-LDA and QDA performed poorly. They are in the range of 71-75% accuracy.
-Also note that LDA/QDA perform well with low number of observations according to
-class lecture. Note we have over 100K observations.
+LDA and QDA performed poorly. They are in the range of 71-75% accuracy. 
 
 ```python
 X_train, y_train = train_base_tweets_df.drop('user_type',axis=1), train_base_tweets_df['user_type']
