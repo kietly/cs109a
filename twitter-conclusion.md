@@ -13,7 +13,7 @@ When trained and tested against the extended data, however, the accuracy signifi
 Even the Logistic Regression Classifier, though the worst performer, had a 6% improvement in accuracy just by adding the extended fields.
 We chose the AdaBoostClassifier because it achieved the highest accuracy, had fast prediction, and at a depth of 2 can still be interpreted.
 
-The table summarizes the progressive improvement in accuracy among all the datasets.
+This table summarizes the progressive improvement in accuracy among all the datasets.
 
 |Models|Base features|NLP features|NLP features+Lexical Diversity|
 |:-----|:------------|:-----------|:-----------------------------|
